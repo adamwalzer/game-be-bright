@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 export default function (props, ref, key, opts = {}) {
     var itemInteract;
     var enemyInteract;
@@ -197,6 +199,9 @@ export default function (props, ref, key, opts = {}) {
                 ]}
             />
             <skoash.Reveal
+                className={classNames({
+                    PLAYING: _.get(props, 'data.instructions.playing')
+                })}
                 openOnStart={opts.openOnStart}
                 openReveal={_.get(props, 'data.openReveal')}
                 closeReveal={_.get(props, 'data.closeReveal')}

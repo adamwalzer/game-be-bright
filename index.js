@@ -16,7 +16,7 @@ import FlipScreen from './components/flip_screen';
 
 import QuitScreen from 'shared/components/quit_screen/0.1';
 
-var BeBright = (
+skoash.start(
     <skoash.Game
         config={config}
         screens={[
@@ -46,7 +46,5 @@ var BeBright = (
         ]}
     />
 );
-
-skoash.start(BeBright);
 
 if (module.hot) module.hot.accept();

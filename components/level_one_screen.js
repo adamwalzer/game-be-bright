@@ -24,7 +24,13 @@ export default function (props, ref, key) {
         disableInterval: 4000,
         openOnStart: 'instructions',
         vos: [
-            <skoash.Audio ref="instructions" type="voiceOver" src={`${CMWN.MEDIA.VO}instructions.mp3`} />,
+            <skoash.Audio
+                ref="instructions"
+                type="voiceOver"
+                src={`${CMWN.MEDIA.VO}instructions.mp3`}
+                playTarget="instructions"
+                completeTarget="instructions"
+            />,
             <skoash.Audio ref="level-up" type="voiceOver" src={`${CMWN.MEDIA.VO}level-up1.mp3`} />,
             <skoash.Audio ref="try-again" type="voiceOver" src={`${CMWN.MEDIA.VO}try-again.mp3`} complete />,
         ],

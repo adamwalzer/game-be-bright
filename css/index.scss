@@ -1154,6 +1154,17 @@ p {
         }
     }
 
+    .reveal {
+        &.PLAYING {
+            .instructions {
+                button {
+                    opacity: .5;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
     .labyrinth-frame {
         background-image: url('#{$image}frame-yellow.png');
         color: $black;
