@@ -3,10 +3,10 @@ import config from './config';
 import Loader from 'shared/components/loader/0.1';
 
 import iOSScreen from 'shared/components/ios_splash_screen/0.1';
-import TitleScreen from './components/title_screen';
-import BulbsScreen from './components/bulbs_screen';
-import PigScreen from './components/pig_screen';
-import InfoScreen from './components/info_screen';
+// import TitleScreen from './components/title_screen';
+// import BulbsScreen from './components/bulbs_screen';
+// import PigScreen from './components/pig_screen';
+// import InfoScreen from './components/info_screen';
 import VideoScreen from './components/video_screen';
 import SpecialAnnouncementScreen from './components/special_announcement_screen';
 import LevelOneScreen from './components/level_one_screen';
@@ -21,10 +21,12 @@ skoash.start(
         config={config}
         screens={[
             iOSScreen,
+            /*
             TitleScreen,
             BulbsScreen,
             PigScreen,
             InfoScreen,
+            */
             VideoScreen,
             SpecialAnnouncementScreen,
             LevelOneScreen,
