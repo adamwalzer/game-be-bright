@@ -1,6 +1,6 @@
 {
     "id": "be-bright",
-    "version": 2,
+    "version": "2.0.0",
     "skoash": "1.1.8",
     "dimensions": {
         "width": 960,
