@@ -1,54 +1,77 @@
 import classNames from 'classnames';
 
+let enemyInteract = function () {
+    this.setState({
+        hit: true,
+    }, () => {
+        setTimeout(() => {
+            this.setState({
+                hit: false
+            });
+        }, 1000);
+    });
+};
+
+let enemyDisable = function () {
+    this.updateScreenData({
+        key: 'game',
+        data: {
+            sfx: 'disable',
+        },
+    });
+    setTimeout(() => {
+        this.updateScreenData({
+            key: 'game',
+            data: {
+                sfx: null,
+            },
+        });
+    }, 500);
+};
+
+let onLabyrinthStop = function () {
+    clearInterval(this.interval);
+};
+
+let onLabyrinthComplete = function () {
+    this.updateScreenData({
+        key: 'openReveal',
+        data: 'level-up',
+    });
+    this.updateScreenData({
+        key: 'game',
+        data: {
+            complete: true,
+        },
+    });
+};
+
+let onOpenReveal = function (message) {
+    this.updateScreenData({
+        key: 'game',
+        data: {
+            stop: true,
+            start: false,
+            vo: message,
+        },
+    });
+};
+
 export default function (props, ref, key, opts = {}) {
-    var itemInteract;
-    var enemyInteract;
-    var enemyDisable;
-    var onLabyrinthStart;
-    var onLabyrinthStop;
-    var onLabyrinthComplete;
-    var onTimerComplete;
-    var onOpenReveal;
-    var onCloseReveal;
-    var items = [];
-    var enemies = [];
+    let itemInteract;
+    let onLabyrinthStart;
+    let onTimerComplete;
+    let onCloseReveal;
+    let items = [];
+    let enemies = [];
 
     itemInteract = function () {
         this.complete();
         this.disable();
-        this.updateGameState({
-            path: 'correct',
+        this.updateScreenData({
+            key: 'correct',
             data: _.get(props, 'data.correct', 0) + 1,
         });
-    };
-
-    enemyInteract = function () {
-        this.setState({
-            hit: true,
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    hit: false
-                });
-            }, 1000);
-        });
-    };
-
-    enemyDisable = function () {
-        this.updateGameState({
-            path: 'game',
-            data: {
-                sfx: 'disable',
-            },
-        });
-        setTimeout(() => {
-            this.updateGameState({
-                path: 'game',
-                data: {
-                    sfx: null,
-                },
-            });
-        }, 500);
     };
 
     onLabyrinthStart = function () {
@@ -67,39 +90,11 @@ export default function (props, ref, key, opts = {}) {
         }, opts.disableInterval);
     };
 
-    onLabyrinthStop = function () {
-        clearInterval(this.interval);
-    };
-
-    onLabyrinthComplete = function () {
-        this.updateGameState({
-            path: 'openReveal',
-            data: 'level-up',
-        });
-        this.updateGameState({
-            path: 'game',
-            data: {
-                complete: true,
-            },
-        });
-    };
-
     onTimerComplete = function () {
         if (_.get(props, 'data.openReveal') === 'level-up') return;
-        this.updateGameState({
-            path: 'openReveal',
+        this.updateScreenData({
+            key: 'openReveal',
             data: 'try-again',
-        });
-    };
-
-    onOpenReveal = function (message) {
-        this.updateGameState({
-            path: 'game',
-            data: {
-                stop: true,
-                start: false,
-                vo: message,
-            },
         });
     };
 
@@ -109,24 +104,24 @@ export default function (props, ref, key, opts = {}) {
             return;
         }
 
-        this.updateGameState({
-            path: 'game',
+        this.updateScreenData({
+            key: 'game',
             data: {
                 stop: false,
                 start: true,
                 restart: false,
             },
         });
-        this.updateGameState({
-            path: 'closeReveal',
+        this.updateScreenData({
+            key: 'closeReveal',
             data: false,
         });
-        this.updateGameState({
-            path: 'openReveal',
+        this.updateScreenData({
+            key: 'openReveal',
             data: null,
         });
-        this.updateGameState({
-            path: 'correct',
+        this.updateScreenData({
+            key: 'correct',
             data: 0,
         });
 
